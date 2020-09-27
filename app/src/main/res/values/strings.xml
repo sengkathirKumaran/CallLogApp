@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CallLogTaskApp</string>
+    <string name="title_activity_navigation">MainActivity</string>
+    <string name="title_calls">Calls</string>
+    <string name="title_contacts">Contacts</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

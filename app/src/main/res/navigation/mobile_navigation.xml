@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/callFragment">
+
+    <fragment
+        android:id="@+id/callFragment"
+        android:name="com.sk.calllogtaskapp.fragments.CallFragment"
+        android:label="@string/title_calls"
+        tools:layout="@layout/fragment_calls">
+    </fragment>
+
+    <fragment
+        android:id="@+id/contactFragment"
+        android:name="com.sk.calllogtaskapp.fragments.ContactFragment"
+        android:label="@string/title_contacts"
+        tools:layout="@layout/fragment_calls">
+    </fragment>
+    <fragment
+        android:id="@+id/contactsFragment"
+        android:name="com.sk.calllogtaskapp.fragments.ContactsFragment"
+        android:label="ContactsFragment">
+        <action
+            android:id="@+id/action_contactsFragment_to_callFragment"
+            app:destination="@id/callFragment" />
+        <argument
+            android:name="selectedCall"
+            app:argType="com.sk.calllogtaskapp.db.CallCacheEntity" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouritesFragment"
+        android:name="com.sk.calllogtaskapp.ui.contacts.FavouritesFragment"
+        android:label="fragment_favourites"
+        tools:layout="@layout/fragment_favourites" />
+    <dialog
+        android:id="@+id/bottomSheetFragment"
+        android:name="com.sk.calllogtaskapp.fragments.BottomSheetFragment"
+        android:label="BottomSheetFragment" />
+
+</navigation>
