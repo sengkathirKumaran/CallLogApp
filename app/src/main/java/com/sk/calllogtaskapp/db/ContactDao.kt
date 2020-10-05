@@ -1,7 +1,9 @@
 package com.sk.calllogtaskapp.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface ContactDao {
@@ -15,14 +17,8 @@ interface ContactDao {
     @Query("SELECT * FROM contacts WHERE favourites='Y'")
     fun favs(): LiveData<List<ContactCacheEntity>>
 
-//    @Query("UPDATE contacts SET favourites='N' WHERE ")
-//    fun update()
-
     @Update
     fun update(vararg con: ContactCacheEntity)
-
-    @Delete
-    fun delete(vararg con: ContactCacheEntity)
 
     @Query("DELETE FROM contacts WHERE number IN (:list)")
     fun deleteMultiple(list: List<String>)

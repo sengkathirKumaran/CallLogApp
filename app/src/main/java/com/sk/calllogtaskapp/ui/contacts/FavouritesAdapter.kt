@@ -1,20 +1,19 @@
 package com.sk.calllogtaskapp.ui.contacts
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.amulyakhare.textdrawable.TextDrawable
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.sk.calllogtaskapp.R
-import com.sk.calllogtaskapp.db.CallCacheEntity
 import com.sk.calllogtaskapp.db.ContactCacheEntity
-import com.sk.calllogtaskapp.fragments.ContactsAdapter
-import kotlinx.android.synthetic.main.adapter_calls.view.*
-import kotlinx.android.synthetic.main.adapter_calls.view.name
-import kotlinx.android.synthetic.main.adapter_calls.view.number
-import kotlinx.android.synthetic.main.adapter_contacts.view.*
-import java.text.SimpleDateFormat
+import kotlinx.android.synthetic.main.adapter_favourites.view.*
 import java.util.*
 
 
@@ -37,22 +36,28 @@ class FavouritesAdapter() : RecyclerView.Adapter<FavouritesAdapter.ViewHolder>()
         holder.itemView.name.text = currentItem.name
         holder.itemView.number.text = currentItem.number
 
-        holder.itemView.call_image.setOnClickListener {
-            val sdf = SimpleDateFormat("MMM dd, yyyy")
-            val currentDate = sdf.format(Date())
-            val call = CallCacheEntity(
-                0,
-                currentItem.name,
-                currentItem.number,
-                currentDate,
-                currentItem.image
-            )
+        val rnd = Random()
+        val color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
 
+        if (currentItem.image.isNotEmpty() && currentItem.image.isNotBlank() && currentItem.image != "null") {
+            Glide.with(holder.itemView)
+                .load("https://source.unsplash.com/random")
+                .transform(CircleCrop())
+                .into(holder.itemView.image)
+        } else {
+            val drawable = TextDrawable.builder()
+                .buildRound(currentItem.name[0].toString().toUpperCase(), color)
+            val image = holder.itemView.findViewById(R.id.image) as ImageView
+            image.setImageDrawable(drawable)
+
+        }
+
+        holder.itemView.call_image.setOnClickListener {
 
             val bundle = bundleOf("selectedContact" to currentItem)
-            println("CONTACT=>$bundle")
             holder.itemView.findNavController().navigate(R.id.callFragment, bundle)
         }
+
 
     }
 

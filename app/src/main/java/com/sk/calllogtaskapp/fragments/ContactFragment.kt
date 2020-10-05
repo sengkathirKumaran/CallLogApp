@@ -2,7 +2,6 @@ package com.sk.calllogtaskapp.fragments
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -57,7 +56,7 @@ class ContactFragment : Fragment(R.layout.fragment_contacts) {
 
         conViewModel =
             ViewModelProvider(this).get(ContactViewModel::class.java)
-conViewModel.allContacts()
+//conViewModel.allContacts()
 
         return super.onCreateView(inflater, container, savedInstanceState)
 
@@ -80,7 +79,7 @@ conViewModel.allContacts()
                 contact?.name.toString(),
                 contact?.number.toString(),
                 contact?.image.toString(),
-                "Y"
+                contact?.favourites.toString()
             )
 
             if (call.number.equals(null) || call.number.contentEquals("null") || call.number.equals(
@@ -118,7 +117,9 @@ conViewModel.allContacts()
 
         val tabLayout: TabLayout = fragmentView.findViewById(R.id.tabs)
         viewPager = fragmentView.findViewById(R.id.view_pager)
+        viewPager.offscreenPageLimit = 1
         viewPager.adapter = TabsAdapter(childFragmentManager, lifecycle)
+
 
         // connect the tabs and view pager2
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
@@ -127,6 +128,21 @@ conViewModel.allContacts()
 
             viewPager.setCurrentItem(tab.position, true)
         }.attach()
+
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+        })
+
         tabLayout.getTabAt(INDEX_OF_FAVOURITES)?.let { tabLayout.selectTab(it) }
     }
 }

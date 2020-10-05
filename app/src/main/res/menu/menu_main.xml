@@ -3,8 +3,8 @@
     <item
         android:id="@+id/miSearch"
         android:icon="@drawable/ic_search_black_24dp"
-        app:showAsAction="ifRoom|collapseActionView"
-        app:iconTint="@color/cardview_light_background"
+        app:showAsAction="ifRoom"
+        app:iconTint="#FFFFFF"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         android:title="Search">
     </item>
@@ -13,7 +13,7 @@
         android:id="@+id/delete"
         android:icon="@drawable/ic_baseline_delete_24"
         app:showAsAction="ifRoom"
-        android:iconTint="@color/cardview_light_background"
+        android:iconTint="#FFFFFF"
         android:title="Delete"/>
 
 
